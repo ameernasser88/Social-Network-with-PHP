@@ -4,7 +4,7 @@ session_start();
 $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
 $DATABASE_PASS = '';
-$DATABASE_NAME = 'dbproject1';
+$DATABASE_NAME = 'socialnetwork';
 // Try and connect using the info above.
 $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
 if ( mysqli_connect_errno() ) {
@@ -17,15 +17,15 @@ if ( mysqli_connect_errno() ) {
 
 
 // Now we check if the data from the login form was submitted, isset() will check if the data exists.
-if ( !isset($_POST['username'], $_POST['password']) ) {
+if ( !isset($_POST['email'], $_POST['password']) ) {
 	// Could not get the data that should have been sent.
 	die ('Please fill both the username and password field!');
 }
 
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-if ($stmt = $con->prepare('SELECT id, password FROM users WHERE username = ?')) {
+if ($stmt = $con->prepare('SELECT id, password FROM users WHERE email = ?')) {
 	// Bind parameters (s = string, i = int, b = blob, etc), in our case the username is a string so we use "s"
-	$stmt->bind_param('s', $_POST['username']);
+	$stmt->bind_param('s', $_POST['email']);
 	$stmt->execute();
 	// Store the result so we can check if the account exists in the database.
 	$stmt->store_result();
@@ -39,27 +39,13 @@ if ($stmt = $con->prepare('SELECT id, password FROM users WHERE username = ?')) 
 		// Create sessions so we know the user is logged in, they basically act like cookies but remember the data on the server.
 		session_regenerate_id();
 		$_SESSION['loggedin'] = TRUE;
-		$_SESSION['name'] = $_POST['username'];
+		$_SESSION['email'] = $_POST['email'];
 		$_SESSION['id'] = $id;
 
-        $userdep = $con->query("SELECT dep_id FROM users WHERE id = $id");
+       echo 'Welcome , your profile page is in the making !!';
 
 
 
-while($rows = $userdep->fetch_assoc() ){
-
-$_SESSION['dep_id']=$rows['dep_id'];
-
-        if($rows['dep_id']===NULL){
-
-
-header('Location: choosedepartment.php');
-        }
-         else{
-         	header('Location: home.php');
-         }
-
-}
 
 
 
@@ -67,13 +53,13 @@ header('Location: choosedepartment.php');
 	} else {
 		echo '<script>';
 echo 'alert("Incorrect password!");';
-echo 'location.href="register.html"';
+echo 'location.href="index.html"';
 echo '</script>';;
 	}
 } else {
 	echo'<script>';
-echo 'alert("Incorrect username!");';
-echo 'location.href="register.html"';
+echo 'alert("Incorrect E-mail!");';
+echo 'location.href="index.html"';
 echo '</script>';;
 }
 $stmt->close();

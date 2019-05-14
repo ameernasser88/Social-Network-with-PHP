@@ -1,5 +1,5 @@
 .navtop {
-	background-color: #1976d2;
+	background-color: #00a1ff;
 	height: 60px;
 	width: 100%;
 	border: 0;
@@ -44,19 +44,31 @@ body.loggedin {
 .content h2 {
 	margin: 0;
 	padding: 25px 0;
+	
 	font-size: 22px;
 	border-bottom: 1px solid #e0e0e3;
 	color: #4a536e;
 }
 
+
+.content h4 {
+	margin: 0;
+	padding: 25px 0;
+	
+	
+	color: #4a536e;
+}
 
 .content h3 {
 	margin: 0;
-	padding: 25px 0;
-	font-size: 22px;
+	margin-top: 0;
+	padding-bottom: 5px;
+	font-size: 20px;
 	border-bottom: 1px solid #e0e0e3;
 	color: #4a536e;
 }
+
+
 .content > p, .content > div {
 	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
 	margin: 25px 0;

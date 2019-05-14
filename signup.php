@@ -72,9 +72,52 @@ if ($stmt = $con->prepare('INSERT INTO users (firstName, lastName, password , em
 
 	$stmt->bind_param('ssssss', $_POST['firstname'], $_POST['lastname'], $password, $_POST['email'] , $_POST['birthdate'] , $_POST['gender']);
 	$stmt->execute();
-	echo 'You have successfully registered, you can now login!';
+	
 
-	//header('Location: auth.php');
+
+
+// after signup data will be insterted into the database to we ge get it to proceed to the next page
+
+if ($stmt = $con->prepare('SELECT id, password FROM users WHERE email = ?')) {
+	// Bind parameters (s = string, i = int), username is a string so we use "s"
+	$stmt->bind_param('s', $_POST['email']);
+	$stmt->execute();
+	// Store the result so we can check if the account exists in the database.
+	$stmt->store_result();
+	if ($stmt->num_rows > 0) {
+	$stmt->bind_result($id, $password);
+	$stmt->fetch();
+	// Account exists, now we verify the password.
+	
+	if (password_verify($_POST['password1'], $password)) {
+		// Verification success! User has loggedin!
+		// Create sessions so we know the user is logged in
+		session_regenerate_id();
+		$_SESSION['loggedin'] = TRUE;
+		$_SESSION['name'] = $_POST['username'];
+		$_SESSION['id'] = $id;
+		header('Location: completeyourprofile.php');
+	} else {
+		echo 'Incorrect password!';
+	}
+} else {
+	echo 'Email already used !';
+}
+$stmt->close();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 } else {

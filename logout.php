@@ -2,5 +2,5 @@
 session_start();
 session_destroy();
 // Redirect to the login page:
-header('Location: register.html');
+header('Location: index.html');
 ?>

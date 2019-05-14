@@ -99,7 +99,7 @@ width: 125px;
 
 
 
-<form>
+<form method="POST" action="submitprofile.php" enctype="multipart/form-data">
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="nickname">Nickname</label>
@@ -138,14 +138,11 @@ width: 125px;
 
  <div class="form-group">
     <label for="profilepicture">Profile Picture</label>
-    <input type="file" class="form-control" id = "profilepicture" name="profilepicture" >
+    <input type="file" class="form-control" id = "profilepicture" name="image" >
   </div>
 
 
-
-  
- 
-  <button type="submit" style="background-color: #00a1ff; border-color: #00a1ff; float: right;" class="btn btn-primary">Continue</button>
+  <button type="submit" style="background-color: #00a1ff; border-color: #00a1ff; float: right;" name="continue" class="btn btn-primary">Continue</button>
 </form>
 
 

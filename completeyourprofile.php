@@ -99,7 +99,7 @@ width: 125px;
 
 
 
-<form method="POST" action="submitprofile.php" enctype="multipart/form-data">
+<form method="POST" action="submitprofile.php" enctype="multipart/form-data" >
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="nickname">Nickname</label>

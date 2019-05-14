@@ -14,7 +14,7 @@ if ( mysqli_connect_errno() ) {
 
 
 
-  $userId = $_SESSION['id']; 
+$userId = $_SESSION['id']; 
 
 $nickname = NULL;
 $phone = NULL;
@@ -34,8 +34,20 @@ if(isset($_POST['about'])){$about =$_POST['about'];}
 if(isset($_POST['maritalstatus'])  && $_POST['maritalstatus']== ""   ){$maritalstatus =NULL;}
 if(  $_POST['maritalstatus']!= ""){$maritalstatus =$_POST['maritalstatus'];}
 
-$sql = $con->query("UPDATE users SET nickName=$nickname , phone=$phone , homeTown=$hometown , maritalStatus=$maritalstatus , about=$about  WHERE  id=8");
+$sql = ("UPDATE users SET nickName=$nickname , phone=$phone , homeTown=$hometown , maritalStatus=$maritalstatus , about=$about  WHERE  id=$userId");
   
+$con->query($sql);
+//////////////////////////////////////////////////////////
+if ($stmt = $con->prepare('UPDATE users SET nickName = ?, phone = ?, homeTown = ? , maritalStatus = ? , about = ? WHERE id = ?') ) {
+	
+	
+
+
+
+	$stmt->bind_param('ssssss', $nickname, $phone, $hometown, $maritalstatus, $about , $userId);
+	$stmt->execute();
+}
+/////////////////////////////////////////////////////
 
 if (isset($_POST['image'])) {
 

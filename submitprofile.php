@@ -34,32 +34,50 @@ if(isset($_POST['about'])){$about =$_POST['about'];}
 if(isset($_POST['maritalstatus'])  && $_POST['maritalstatus']== ""   ){$maritalstatus =NULL;}
 if(  $_POST['maritalstatus']!= ""){$maritalstatus =$_POST['maritalstatus'];}
 
-$sql = ("UPDATE users SET nickName=$nickname , phone=$phone , homeTown=$hometown , maritalStatus=$maritalstatus , about=$about  WHERE  id=$userId");
+//$sql = ("UPDATE users SET nickName=$nickname , phone=$phone , homeTown=$hometown , maritalStatus=$maritalstatus , about=$about  WHERE  id=$userId");
   
-$con->query($sql);
+//$con->query($sql);
 //////////////////////////////////////////////////////////
 if ($stmt = $con->prepare('UPDATE users SET nickName = ?, phone = ?, homeTown = ? , maritalStatus = ? , about = ? WHERE id = ?') ) {
-	
-	
-
-
-
 	$stmt->bind_param('ssssss', $nickname, $phone, $hometown, $maritalstatus, $about , $userId);
 	$stmt->execute();
 }
 /////////////////////////////////////////////////////
 
-if (isset($_POST['image'])) {
+
+
+
+
+
+if (isset($_POST['continue']) ) {
 
     // Get image name
 	$image = $_FILES['image']['name'];
 
 
+	if ($image=="" || $image==NULL) {
+		$image = NULL;
+	}
+
+
+
+if($image!=NULL){
+	$image = $userId.$image;
+}
+
+
   	// image file directory
   	$target = "profilepictures/".basename($image);
 
-    $sql = "UPDATE users SET profilepicture =$image  WHERE    id=$userId";
-     $con->query($sql);
+   // $sql = "UPDATE users SET profilepicture =$image  WHERE    id=$userId";
+    // $con->query($sql);
+
+
+   if ($stmt = $con->prepare('UPDATE users SET profilePicture = ? WHERE id = ?') ) {
+	$stmt->bind_param('ss', $image , $userId);
+	$stmt->execute();
+}
+
 
 
   	if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {

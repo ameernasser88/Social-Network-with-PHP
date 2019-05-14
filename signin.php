@@ -42,7 +42,7 @@ if ($stmt = $con->prepare('SELECT id, password FROM users WHERE email = ?')) {
 		$_SESSION['email'] = $_POST['email'];
 		$_SESSION['id'] = $id;
 
-       echo 'Welcome , your profile page is in the making !!';
+      header('Location: completeyourprofile.php');
 
 
 

@@ -107,19 +107,6 @@ $stmt->close();
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 } else {
 	// Something is wrong with the sql statement
 	echo 'Could not prepare statement!';

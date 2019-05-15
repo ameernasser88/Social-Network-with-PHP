@@ -38,8 +38,10 @@ body.loggedin {
 	background-color: #f3f4f7;
 }
 .content {
-	width: 1000px;
+	
 	margin: 0 auto;
+    width: 72%;
+	background-color: #f3f4f7;
 }
 .content h2 {
 	margin: 0;
@@ -69,11 +71,11 @@ body.loggedin {
 }
 
 
-.content > p, .content > div {
+.content > p {
 	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
 	margin: 25px 0;
 	padding: 25px;
-	background-color: #fff;
+	
 }
 .content > p table td, .content > div table td {
 	padding: 5px;

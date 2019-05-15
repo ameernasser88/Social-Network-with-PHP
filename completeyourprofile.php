@@ -94,33 +94,38 @@ width: 125px;
            <h3 ">Please complete your profile ! </h3>
 		</div>
 
+
+
+
 	<div class="content" style="margin: 0 auto;">
 
 
-
+    <div class="container">
 
 <form method="POST" action="submitprofile.php" enctype="multipart/form-data" >
   <div class="form-row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-6 col-xs-12 col-sm-12 ">
       <label for="nickname">Nickname</label>
       <input type="text" class="form-control" id="nickname" name="nickname" placeholder="Nickname">
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-6 col-xs-12 col-sm-12">
       <label for="phone">Phone Number</label>
       <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone Number">
     </div>
   </div>
-  <div class="form-group">
+   <div class="form-row ">
+ 	<div class="form-group col-md-12 col-xs-12 col-sm-12">
     <label for="about">About</label>
     <input type="text" class="form-control" name="about"  id="about" placeholder="Tell Us Something About Yourself !">
   </div>
+  </div>
  
   <div class="form-row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-6 col-xs-12 col-sm-12">
       <label for="hometown">Hometown</label>
       <input type="text" class="form-control" id="hometown" name="hometown" placeholder="Hometown">
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-6 col-xs-12 col-sm-12">
       <label for="maritalstatus">Marital Status</label>
       <select name="maritalstatus" id="maritalstatus" class="form-control">
         <option selected value="">Choose...</option>
@@ -136,9 +141,11 @@ width: 125px;
 
 
 
- <div class="form-group">
+ <div class="form-row ">
+ 	<div class="form-group col-md-12">
     <label for="profilepicture">Profile Picture</label>
     <input type="file" class="form-control" id = "profilepicture" name="image" >
+    </div>
   </div>
 
 
@@ -152,7 +159,7 @@ width: 125px;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    margin-top:6%;">
+    margin-top:10%;">
 	
   <p>2019  ©</p>
   
@@ -160,6 +167,10 @@ width: 125px;
 
 </span>
 </div>
+</div>
+
+
+
 
 
 

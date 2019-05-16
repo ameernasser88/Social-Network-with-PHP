@@ -247,7 +247,19 @@ height: 150px;
 
 
 
+<span>
 
+<footer style=" display: table;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:20%;">
+  
+  <p>2019  ©</p>
+  
+</footer>
+
+</span>
 
 
 </div>

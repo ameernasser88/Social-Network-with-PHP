@@ -159,7 +159,7 @@ width: 150px;
    <h3> <a class="navbar-brand" href="/socialnetwork">The Social Network</a> </h3>
     <ul class="navbar-nav  ml-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">My Profile<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#"><i class="fas fa-home"></i> My Profile<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="#">Discover</a>

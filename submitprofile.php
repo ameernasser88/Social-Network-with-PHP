@@ -135,6 +135,37 @@ if($image!=NULL){
 
 
 
+if( isset($_POST["removepp"])) 
+{
+
+	$res = $con->query("SELECT  gender  FROM users  where id = $userId ");
+	$gender = NULL;
+
+	 while ($row = $res->fetch_assoc())
+ {
+$gender = $row['gender'];
+ }
+
+
+
+ $photo = $gender.".png";
+
+   if ($stmt = $con->prepare('UPDATE users SET profilePicture = ? WHERE id = ?') ) {
+	$stmt->bind_param('ss', $photo , $userId);
+	$stmt->execute();}
+
+
+
+ 
+}
+
+
+
+
+
+
+
+
 header('Location: home.php');
 
 

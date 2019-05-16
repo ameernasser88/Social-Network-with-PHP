@@ -153,7 +153,7 @@ width: 125px;
    <h3> <a class="navbar-brand" href="/socialnetwork">The Social Network</a> </h3>
     <ul class="navbar-nav  ml-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="home.php">My Profile<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="home.php"><i class="fas fa-home"></i> My Profile<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="#">Discover</a>
@@ -303,6 +303,14 @@ width: 125px;
     <input type="file" class="form-control" id = "profilepicture" name="image" >
     </div>
   </div>
+
+<div class="form-row ">
+<div class="form-check form-group " style="margin-left: 1%;">
+    <input type="checkbox" class="form-check-input" id="removepp" name="removepp" value="true" >
+    <label class="form-check-label" for="removepp">Remove My Profile Picture</label>
+  </div>
+  </div>
+
 
 <a href="home.php" target="_blank" style="float: right; margin-right: 1%;">Cancel</a>
 

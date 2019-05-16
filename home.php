@@ -45,12 +45,27 @@ $lName = ucwords($lName);
 $name = $fName." ".$lName; 
 
 $nickname = NULL;
-$result2 = $con->query("SELECT nickName FROM users  where id = $id ");
+
+$profilepicture = NULL;
+
+$phone = NULL;
+
+$homeTown=NULL;
+
+$maritalStatus = NULL;
+
+$result2 = $con->query("SELECT nickName , phone, profilePicture , homeTown , maritalStatus FROM users  where id = $id ");
 
  while ($row = $result2->fetch_assoc())
  {
- $nickname =$row['nickName'];
+ $nickname = $row['nickName'];
+$profilepicture = $row['profilePicture'];
 
+$phone =  $row['phone'];;
+
+$homeTown= $row['homeTown'];;
+
+$maritalStatus =  $row['maritalStatus'];;
  }
 
 
@@ -95,7 +110,7 @@ if( $nickname != NULL )
 <style>
 	
 	.avatar-pic {
-width: 125px;
+width: 150px;
 }
 </style>
 
@@ -111,8 +126,45 @@ width: 125px;
 			</div>
 		</nav>
 
-		<div class="content" style="margin-top:2px; margin-bottom: 0;" >
-			<h4>Welcome , <?=$name?> !</h4>
+		<div class="content" style="margin-top:2%; margin-bottom: 0;" >
+			<!-- <h4>Welcome , <?=$name?> !</h4> -->
+
+
+
+
+
+
+<div class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-sm-10">
+            <h1><?=$name?></h1></div>
+        <div class="col-sm-2">
+            <a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive avatar-pic" src="profilepictures/<?=$profilepicture?>"></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <!--left col-->
+
+            <ul class="list-group">
+                <li class="list-group-item text-muted">Profile</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Hometown   </strong></span><?=$homeTown?></li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Phone   </strong></span> <?=$phone?></li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Status   </strong></span> <?=$maritalStatus?></li>
+
+            </ul>
+
+          
+
+           
+
+            
+
+        </div>
+
+
+
+
 
 		</div>
 

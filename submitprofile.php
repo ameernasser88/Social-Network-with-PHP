@@ -35,7 +35,14 @@ if((isset($_POST['hometown'])) &&($_POST['hometown']!="") ){$hometown =$_POST['h
 if((isset($_POST['about'])) &&($_POST['about']!="") ){$about =$_POST['about'];}
 
 
+$ppquery = $con->query("SELECT profilePicture  FROM users  where id = $userId ");
 
+$pp = NULL;
+
+ while ($row = $ppquery->fetch_assoc())
+ {
+    $pp = $row['profilePicture'];
+ }
 
 
 
@@ -62,8 +69,19 @@ if (isset($_POST['continue']) ) {
 
 
 
+// if the user doesnt upload a photo , if he/she already has one it will remain unchanged or his/her profile picture will be set according to gender field
+if (
 
-if ( isset($_SESSION['editing']) && ( ($_FILES['image']['name']==NULL  || $_FILES['image']['name']=="" ) ) ) {}
+     (isset($_SESSION['editing']) && ( ($_FILES['image']['name']==NULL  || $_FILES['image']['name']=="" )) )
+
+                                                   ||
+            
+     ( ($pp=="male.png" || $pp=="female.png" )  && ($_FILES['image']['name']==NULL  || $_FILES['image']['name']=="" ) ) ) 
+
+
+               {
+
+               }
 
 
 

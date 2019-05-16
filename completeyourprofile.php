@@ -36,15 +36,18 @@ $id=$_SESSION['id'];
 
 
 
-$results = $con->query("SELECT firstName , lastName  FROM users  where id = $id ");
+$results = $con->query("SELECT firstName , lastName , gender  FROM users  where id = $id ");
 
 $fName=NULL;
 $lName=NULL;
+$gender = NULL;
 
  while ($row = $results->fetch_assoc())
  {
  $fName =$row['firstName'];
  $lName = $row['lastName'];
+ $gender = $row['gender'];
+
  }
 
 $fName = strtolower($fName);
@@ -53,6 +56,19 @@ $fName = ucwords($fName);
 $lName = ucwords($lName);
 $name = $fName." ".$lName; 
 
+
+
+
+
+
+
+
+	$photo = $gender.".png";
+
+   if ($stmt = $con->prepare('UPDATE users SET profilePicture = ? WHERE id = ?') ) {
+	$stmt->bind_param('ss', $photo , $id);
+	$stmt->execute();
+}
 
 
 

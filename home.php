@@ -129,6 +129,7 @@ if( $nickname != NULL )
 	
 	.avatar-pic {
 width: 150px;
+height: 150px;
 }
 </style>
 

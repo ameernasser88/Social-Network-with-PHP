@@ -250,8 +250,11 @@ width: 125px;
     </div>
   </div>
 
+<a href="home.php" target="_blank" style="float: right; margin-right: 1%;">Cancel</a>
 
-  <button type="submit" style="background-color: #00a1ff; border-color: #00a1ff; float: right;" name="continue" class="btn btn-primary">Continue</button>
+<br> 
+<br>
+  <button type="submit" style=" float: right; background-color: #00a1ff; border-color: #00a1ff; float: right;" name="continue" class="btn btn-primary">Save</button>
 </form>
 
 

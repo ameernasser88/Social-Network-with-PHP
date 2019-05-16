@@ -101,7 +101,7 @@ if( $nickname != NULL )
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Profile Page</title>
+  <title><?=$name?></title>
   <link href="css/stylesheet.css" rel="stylesheet" type="text/css">
   
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">

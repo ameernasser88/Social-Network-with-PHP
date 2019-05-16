@@ -55,7 +55,7 @@ if ($stmt = $con->prepare('SELECT id, password FROM users WHERE email = ?') ) {
 
 		echo '<script>';
 echo 'alert("E-mail exists !\nenter another one");';
-echo 'location.href="index.html"';
+echo 'location.href="index.php"';
 echo '</script>';;
 	}
 
@@ -94,6 +94,7 @@ if ($stmt = $con->prepare('SELECT id, password FROM users WHERE email = ?')) {
 		// Create sessions so we know the user is logged in
 		session_regenerate_id();
 		$_SESSION['loggedin'] = TRUE;
+		
 		$_SESSION['name'] = $_POST['username'];
 		$_SESSION['id'] = $id;
 		header('Location: completeyourprofile.php');

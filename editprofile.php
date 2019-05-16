@@ -18,23 +18,11 @@ if (mysqli_connect_errno()) {
 
 
 
-
-
-if (isset($_SESSION['registered'])) {
-
-
-   header('Location: home.php');
-  
-}   
-
-
-
-
 $id=$_SESSION['id'];
 
 
 
-
+$_SESSION['editing'] = TRUE;
 
 $results = $con->query("SELECT firstName , lastName  FROM users  where id = $id ");
 
@@ -51,22 +39,62 @@ $fName = strtolower($fName);
 $lName = strtolower($lName);
 $fName = ucwords($fName);
 $lName = ucwords($lName);
+
 $name = $fName." ".$lName; 
 
+$nname = NULL;
+$result2 = $con->query("SELECT nickName FROM users  where id = $id ");
+
+ while ($row = $result2->fetch_assoc())
+ {
+ $nname =$row['nickName'];
+
+ }
+
+
+
+if( $nname != NULL )
+{
+ $name = $nname;
+}
+
+
+$nickName = NULL;
+$phone = NULL;
+$homeTown = NULL;
+$maritalStatus = NULL;
+$about = NULL;
+
+$results = $con->query("SELECT nickName , phone , homeTown , maritalStatus , about FROM users  where id = $id ");
+
+
+
+while ($row = $results->fetch_assoc())
+ {
+ $nickName =$row['nickName'];
+ $phone = $row['phone'];
+ $homeTown =$row['homeTown'];
+ $maritalStatus = $row['maritalStatus'];
+ $about =$row['about'];
+ }
+
+
+ if($nickName == NULL) {  $nickname = "";  }
+ if($phone == NULL) {  $phone = "";  }
+ if($homeTown == NULL) {  $homeTown= "";  }
+ if($maritalStatus == NULL) {  $maritalStatus = "";  }
+ if($about == NULL) {  $about = "";  }
 
 
 
 
 
-// $stmt = $con->prepare('SELECT password, email FROM users WHERE id = ?');
-// // In this case we can use the account ID to get the account info.
-// $stmt->bind_param('s', $_SESSION['id']);
-// $stmt->execute();
-// $stmt->bind_result($password, $email);
-// $stmt->fetch();
-// $stmt->close();
 
-// $id = $_SESSION['id'];
+
+
+
+
+
 
 
 
@@ -79,7 +107,7 @@ $name = $fName." ".$lName;
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Complete Your Profile</title>
+  <title>Edit Your Profile</title>
 
   <link href="css/stylesheet.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="css/bootstrap.css">
@@ -100,6 +128,8 @@ width: 125px;
 	<nav class="navtop">
 			<div>
 				<h1>The Social Network</h1>
+
+        <a href="home.php"><i class="fas fa-home"></i>Your Profile</a>
 				
 				<a href="signout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
 			</div>
@@ -111,7 +141,7 @@ width: 125px;
 		</div>
 
 		<div class="content" style=" margin-bottom: 25px;">
-           <h3 ">Please complete your profile ! </h3>
+           <h3 ">Edit Your Profile</h3>
 		</div>
 
 
@@ -126,34 +156,86 @@ width: 125px;
   <div class="form-row">
     <div class="form-group col-md-6 col-xs-12 col-sm-12 ">
       <label for="nickname">Nickname</label>
-      <input type="text" class="form-control" id="nickname" name="nickname" placeholder="Nickname">
+      <input type="text" class="form-control" id="nickname" name="nickname" value="<?=$nickName?>" placeholder="Nickname">
     </div>
     <div class="form-group col-md-6 col-xs-12 col-sm-12">
       <label for="phone">Phone Number</label>
-      <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone Number">
+      <input type="tel" class="form-control" id="phone" name="phone" value="<?=$phone?>" placeholder="Phone Number">
     </div>
   </div>
    <div class="form-row ">
  	<div class="form-group col-md-12 col-xs-12 col-sm-12">
     <label for="about">About</label>
-    <input type="text" class="form-control" name="about"  id="about" placeholder="Tell Us Something About Yourself !">
+    <input type="text" class="form-control" name="about"  id="about" value="<?=$about?>" placeholder="Tell Us Something About Yourself !">
   </div>
   </div>
  
   <div class="form-row">
     <div class="form-group col-md-6 col-xs-12 col-sm-12">
       <label for="hometown">Hometown</label>
-      <input type="text" class="form-control" id="hometown" name="hometown" placeholder="Hometown">
+      <input type="text" class="form-control" id="hometown" name="hometown" value="<?=$homeTown?>" placeholder="Hometown">
     </div>
     <div class="form-group col-md-6 col-xs-12 col-sm-12">
       <label for="maritalstatus">Marital Status</label>
       <select name="maritalstatus" id="maritalstatus" class="form-control">
+
+      <?php if($maritalStatus== NULL) {?>
+
+
         <option selected value="">Choose...</option>
 
 
         <option value="Single">Single</option>
         <option value="Engaged">Engaged</option>
         <option value="Married">Married</option>
+
+<?php } else if ($maritalStatus== "Single") { ?>
+
+
+
+
+        <option  selected value="Single">Single</option>
+        <option  value="Engaged">Engaged</option>
+        <option value="Married">Married</option>
+        <option value="">Leave Empty</option>
+
+
+<?php } else if ($maritalStatus== "Engaged") { ?>
+
+
+
+
+        <option   value="Single">Single</option>
+        <option selected value="Engaged">Engaged</option>
+        <option value="Married">Married</option>
+        <option value="">Leave Empty</option>
+
+
+
+      <?php } else if ($maritalStatus== "Married") { ?>
+
+<option   value="Single">Single</option>
+        <option  value="Engaged">Engaged</option>
+        <option selected value="Married">Married</option>
+        <option value="">Leave Empty</option>
+
+
+<?php } else { ?>
+
+
+ <option selected value="">Choose...</option>
+
+
+        <option value="Single">Single</option>
+        <option value="Engaged">Engaged</option>
+        <option value="Married">Married</option>
+
+
+
+  <?php } ?>
+
+
+
       </select>
     </div>
     
@@ -163,7 +245,7 @@ width: 125px;
 
  <div class="form-row ">
  	<div class="form-group col-md-12">
-    <label for="profilepicture">Profile Picture</label>
+    <label for="profilepicture">Update Profile Picture</label>
     <input type="file" class="form-control" id = "profilepicture" name="image" >
     </div>
   </div>

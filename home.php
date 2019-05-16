@@ -2,32 +2,63 @@
 
 session_start();
 // If the user is not logged in redirect to the login page...
-if (!isset($_SESSION['loggedin'])) {
-	header('Location: index.html');
+if (!isset($_SESSION['loggedin'])    ) {
+	header('Location: index.php');
 	exit();
 }
+
+
+
+
+$_SESSION['registered']=TRUE;
 
 $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
 $DATABASE_PASS = '';
 $DATABASE_NAME = 'socialnetwork';
+
+
+
+
 $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
 if (mysqli_connect_errno()) {
 	die ('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
 $id=$_SESSION['id'];
 
-$results = $con->query("SELECT nickName FROM users  where id = $id ");
+$results = $con->query("SELECT firstName , lastName  FROM users  where id = $id ");
 
-$nickname=NULL;
-
+$fName=NULL;
+$lName=NULL;
 
  while ($row = $results->fetch_assoc())
  {
- $nickname =$row['nickName'];
- 
+ $fName =$row['firstName'];
+ $lName = $row['lastName'];
  }
 
+$fName = strtolower($fName);
+$lName = strtolower($lName);
+$fName = ucwords($fName);
+$lName = ucwords($lName);
+
+$name = $fName." ".$lName; 
+
+$nickname = NULL;
+$result2 = $con->query("SELECT nickName FROM users  where id = $id ");
+
+ while ($row = $result2->fetch_assoc())
+ {
+ $nickname =$row['nickName'];
+
+ }
+
+
+
+if( $nickname != NULL )
+{
+ $name = $nickname;
+}
 
 
 
@@ -75,13 +106,13 @@ width: 125px;
 	<nav class="navtop">
 			<div>
 				<h1>The Social Network</h1>
-				
+				<a href="editprofile.php"><i class="fas fa-home"></i>Edit Profile</a>
 				<a href="signout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
 			</div>
 		</nav>
 
 		<div class="content" style="margin-top:2px; margin-bottom: 0;" >
-			<h4>Welcome , <?=$nickname?> !</h4>
+			<h4>Welcome , <?=$name?> !</h4>
 
 		</div>
 

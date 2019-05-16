@@ -26,10 +26,19 @@ $profilepicture = NULL;
 
 $msg = "";
 
-if(isset($_POST['nickname'])){$nickname =$_POST['nickname'];}
-if(isset($_POST['phone'])){$phone =$_POST['phone'];}
-if(isset($_POST['hometown'])){$hometown =$_POST['hometown'];}
-if(isset($_POST['about'])){$about =$_POST['about'];}
+if(  (isset($_POST['nickname']) )&&($_POST['nickname']!="")){$nickname =$_POST['nickname'];}
+
+if(( isset($_POST['phone']) )  &&($_POST['phone']!="") ){$phone =$_POST['phone'];}
+
+if((isset($_POST['hometown'])) &&($_POST['hometown']!="") ){$hometown =$_POST['hometown'];}
+
+if((isset($_POST['about'])) &&($_POST['about']!="") ){$about =$_POST['about'];}
+
+
+
+
+
+
 
 if(isset($_POST['maritalstatus'])  && $_POST['maritalstatus']== ""   ){$maritalstatus =NULL;}
 if(  $_POST['maritalstatus']!= ""){$maritalstatus =$_POST['maritalstatus'];}
@@ -51,11 +60,20 @@ if ($stmt = $con->prepare('UPDATE users SET nickName = ?, phone = ?, homeTown = 
 
 if (isset($_POST['continue']) ) {
 
+
+
+
+if ( isset($_SESSION['editing']) && ( ($_FILES['image']['name']==NULL  || $_FILES['image']['name']=="" ) ) ) {}
+
+
+
+	else{
+
     // Get image name
 	$image = $_FILES['image']['name'];
 
 
-	if ($image=="" || $image==NULL) {
+	if ( ($image=="" || $image==NULL) && !isset($_SESSION['editing']) ) {
 		$image = NULL;
 	}
 
@@ -85,6 +103,13 @@ if($image!=NULL){
   	}else{
   		$msg = "Failed to upload image";
   	}
+
+
+
+}
+
+
+
   }
 
 

@@ -42,7 +42,7 @@ if ($stmt = $con->prepare('SELECT id, password FROM users WHERE email = ?')) {
 		$_SESSION['email'] = $_POST['email'];
 		$_SESSION['id'] = $id;
 
-      header('Location: completeyourprofile.php');
+      header('Location: home.php');
 
 
 
@@ -53,13 +53,13 @@ if ($stmt = $con->prepare('SELECT id, password FROM users WHERE email = ?')) {
 	} else {
 		echo '<script>';
 echo 'alert("Incorrect password!");';
-echo 'location.href="index.html"';
+echo 'location.href="/socialnetwork"';
 echo '</script>';;
 	}
 } else {
 	echo'<script>';
 echo 'alert("Incorrect E-mail!");';
-echo 'location.href="index.html"';
+echo 'location.href="/socialnetwork"';
 echo '</script>';;
 }
 $stmt->close();

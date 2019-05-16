@@ -57,7 +57,7 @@ $result2 = $con->query("SELECT nickName FROM users  where id = $id ");
 
 if( $nickname != NULL )
 {
- $name = $nickname;
+ $name =ucwords($nickname);
 }
 
 

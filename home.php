@@ -147,7 +147,7 @@ width: 150px;
             <!--left col-->
 
             <ul class="list-group">
-                <li class="list-group-item text-muted">Profile</li>
+                <li class="list-group-item text-muted">Info</li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong>Hometown   </strong></span><?=$homeTown?></li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong>Phone   </strong></span> <?=$phone?></li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong>Status   </strong></span> <?=$maritalStatus?></li>

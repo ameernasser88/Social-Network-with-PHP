@@ -161,14 +161,14 @@ width: 125px;
 
 
 
- <div class="form-row ">
+ <div class="form-row " style="margin-bottom: 2%;">
  	<div class="form-group col-md-12">
     <label for="profilepicture">Profile Picture</label>
     <input type="file" class="form-control" id = "profilepicture" name="image" >
     </div>
   </div>
 
-
+<a href="home.php" target="_blank" style="float: left;">Skip For Now</a>
   <button type="submit" style="background-color: #00a1ff; border-color: #00a1ff; float: right;" name="continue" class="btn btn-primary">Continue</button>
 </form>
 

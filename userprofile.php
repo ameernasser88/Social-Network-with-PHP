@@ -82,19 +82,6 @@ if( $nickname != NULL )
 
 
 
-
-
-
-// $stmt = $con->prepare('SELECT password, email FROM users WHERE id = ?');
-// // In this case we can use the account ID to get the account info.
-// $stmt->bind_param('s', $_SESSION['id']);
-// $stmt->execute();
-// $stmt->bind_result($password, $email);
-// $stmt->fetch();
-// $stmt->close();
-
-// $id = $_SESSION['id'];
-
 $result3 = $con->query("SELECT firstName , lastName , nickName  FROM users  where id = $id ");
 
 
@@ -127,6 +114,71 @@ if( $mynickname != NULL )
 }
 
 
+
+
+
+////////// FRIENDSHIP STATUS //////////
+
+ $fStatus = NULL ;
+ $statusA = NULL;
+ $statusB = NULL;
+
+/* 
+
+fStatus is a variable that will hold one of 4 values 
+
+       0 means that the logged in user is not friends with the displayed user
+
+       1 means that the displayed user has sent the logged in user a friend request and waiting for approval
+
+       2 means that the logged in user has sent the displayed user a friend request and waiting for approval
+
+       3 means that the 2 users are friends
+
+       
+
+
+*/
+
+   $userASQL = $con->query("SELECT status FROM friends  WHERE userA = $id AND userB = $friendID ");
+
+if (mysqli_num_rows($userASQL)==0) { $fStatus = 0;}
+
+
+   $userBSQL = $con->query("SELECT status FROM friends  WHERE userA = $friendID AND userB = $id ");
+
+ if (mysqli_num_rows($userBSQL)==0) { $fStatus = 0;}  
+
+
+
+while ($row = $userASQL->fetch_assoc())
+ {
+     $statusA = $row['status'];
+ }
+
+ while ($row = $userBSQL->fetch_assoc())
+ {
+     $statusB = $row['status'];
+ }
+
+
+// case 1 
+if( $statusA == 0 && $statusB == 1  )
+{
+  $fStatus = 1;
+}
+
+// case 2
+else if ( $statusA == 1 && $statusB == 0)
+{
+  $fStatus = 2;
+}
+
+// case 3
+else if ( $statusA == 1 && $statusB == 1) {
+
+  $fStatus = 3;
+}
 
 
 
@@ -251,9 +303,71 @@ height: 150px;
             <a href="#" class="pull-right"><img title="profile image" class="img-circle img-responsive avatar-pic" src="profilepictures/<?=$profilepicture?>"></a>
 
 
+
+
+<?php 
+
+if($fStatus==0) {?>
             <form method="POST" action="addfriend.php?id=<?=$friendID?>"  >
             <button   class="btn btn-sm btn-primary " style=" margin-top: 5%; width: 150px;   background-color: #00a1ff; border-color: #00a1ff; ">Add Friend</button>
             </form>
+
+<?php 
+}
+?>
+
+
+
+
+<?php 
+
+if($fStatus==1){ ?>
+            <form method="POST" action="addfriend.php?id=<?=$friendID?>"  >
+            <button   class="btn btn-sm btn-primary " style=" margin-top: 5%; width: 150px;   background-color: #00a1ff; border-color: #00a1ff; ">Accept Request</button>
+            </form>
+
+<?php 
+}
+?>
+
+
+
+
+
+<?php 
+
+if($fStatus==2) {?>
+            <form method="POST" action=""  >
+            <button   class="btn btn-sm btn-primary " style=" margin-top: 5%; width: 150px;   background-color: #00a1ff; border-color: #00a1ff; ">Cancel Request</button>
+            </form>
+
+<?php 
+}
+?>
+
+
+
+
+
+
+<?php 
+
+if($fStatus==3) {?>
+            <form method="POST" action=""  >
+            <button   class="btn btn-sm btn-primary " style=" margin-top: 5%; width: 150px;   background-color: #00a1ff; border-color: #00a1ff; ">Remove Friend</button>
+            </form>
+
+<?php 
+}
+?>
+
+
+
+
+
+
+
+
         </div>
     </div>
     <div class="row">

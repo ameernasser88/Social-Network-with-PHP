@@ -34,6 +34,13 @@
 .navtop div a:hover {
 	color: #eaebed;
 }
+
+html {
+    overflow: -moz-scrollbars-vertical; 
+    overflow-y: scroll;
+}
+
+
 body.loggedin {
 	background-color: #f3f4f7;
 }
@@ -89,3 +96,5 @@ body.loggedin {
 	padding: 5px;
 	margin: 0 0 10px 0;
 }
+
+

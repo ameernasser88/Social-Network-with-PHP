@@ -270,7 +270,7 @@ height: 150px;
         </div>
       </li>
 
- <form class="form-inline my-2 my-lg-0">
+ <form class="form-inline my-2 my-lg-0" action="discover.php">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn  my-2 my-sm-0" style="background-color: #00a1ff; border-color: white; color: white;" type="submit"><i class="fa fa-search"></i></button>
     </form>
@@ -309,7 +309,7 @@ height: 150px;
 
 if($fStatus==0) {?>
             <form method="POST" action="addfriend.php?id=<?=$friendID?>"  >
-            <button   class="btn btn-sm btn-primary " style=" margin-top: 5%; width: 150px;   background-color: #00a1ff; border-color: #00a1ff; ">Add Friend</button>
+            <button   class="btn btn-sm btn-primary " style=" margin-top: 5%; width: 150px;   background-color: #00a1ff; border-color: #00a1ff; "><strong>Add Friend</strong></button>
             </form>
 
 <?php 
@@ -323,7 +323,10 @@ if($fStatus==0) {?>
 
 if($fStatus==1){ ?>
             <form method="POST" action="addfriend.php?id=<?=$friendID?>"  >
-            <button   class="btn btn-sm btn-primary " style=" margin-top: 5%; width: 150px;   background-color: #00a1ff; border-color: #00a1ff; ">Accept Request</button>
+            <button   class="btn btn-sm btn-success " style=" margin-top: 5%; width: 150px; background-color: #64dd17; border-color: #64dd17;  "> <strong>Accept Request</strong></button>
+            </form>
+            <form method="POST" action="addfriend.php?id=<?=$friendID?>"  >
+            <button   class="btn btn-sm btn-danger " style=" margin-top: 5%; width: 150px;  "> <strong>Decline Request</strong></button>
             </form>
 
 <?php 
@@ -338,7 +341,7 @@ if($fStatus==1){ ?>
 
 if($fStatus==2) {?>
             <form method="POST" action=""  >
-            <button   class="btn btn-sm btn-primary " style=" margin-top: 5%; width: 150px;   background-color: #00a1ff; border-color: #00a1ff; ">Cancel Request</button>
+            <button   class="btn btn-sm btn-warning " style=" margin-top: 5%; width: 150px; color: white;"><strong>Cancel Request</strong></button>
             </form>
 
 <?php 
@@ -354,7 +357,7 @@ if($fStatus==2) {?>
 
 if($fStatus==3) {?>
             <form method="POST" action=""  >
-            <button   class="btn btn-sm btn-primary " style=" margin-top: 5%; width: 150px;   background-color: #00a1ff; border-color: #00a1ff; ">Remove Friend</button>
+            <button   class="btn btn-sm btn-danger " style=" margin-top: 5%; width: 150px; "><strong>Remove Friend</strong></button>
             </form>
 
 <?php 

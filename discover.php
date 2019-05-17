@@ -179,11 +179,11 @@ while ($row = $results->fetch_assoc() )
 
 
 
-
+$friendID = $row['id'];
  $firstName =$row['firstName'];
  $lastName = $row['lastName'];
  $nickName =$row['nickName'];
-  $friendID = $row['id'];
+  
   $friendpp =$row['profilePicture'];
  
 
@@ -209,12 +209,12 @@ if( $nickName != NULL )
     
   <div class="col-md-3 col-sm-6 " style="margin-top:5px; margin-bottom: 5px; ">
     <div class="img-thumbnail">
-         <img src="profilepictures/<?=$friendpp?>" style="padding-top: 4px; padding-bottom: 4px; margin-bottom: 4px;" class="pp-pic" n>
+         <img src="profilepictures/<?=$friendpp?>" style="  border-radius: 10%; padding-top: 4px; padding-bottom: 4px; margin-bottom: 4px;" class="pp-pic" n>
          <div class="caption">
-           <a  href="userprofile.php?id=' . $friendID . '" >   <h6><?=$friendName?></h6> </a>
+           <a  href="userprofile.php?id=<?=$friendID?>" >   <h6><?=$friendName?></h6> </a>
          </div>
          <p>
-           <a href="userprofile.php?id=' . $friendID . '" class="btn btn-sm btn-primary" style="background-color: #00a1ff; border-color: #00a1ff; ">View Profile</a>
+           <a href="userprofile.php?id=<?=$friendID?>" class="btn btn-sm btn-primary" style="background-color: #00a1ff; border-color: #00a1ff; ">View Profile</a>
          </p>
     </div>
    

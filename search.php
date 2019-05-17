@@ -131,7 +131,7 @@ height: 120px;
         <a class="nav-link" href="home.php"><i class="fas fa-home"></i> <?=$name?><span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="#">Discover</a>
+        <a class="nav-link" href="discover.php">Discover</a>
       </li>
      
 

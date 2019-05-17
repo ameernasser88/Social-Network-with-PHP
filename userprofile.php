@@ -95,6 +95,37 @@ if( $nickname != NULL )
 
 // $id = $_SESSION['id'];
 
+$result3 = $con->query("SELECT firstName , lastName , nickName  FROM users  where id = $id ");
+
+
+ $mynickname = NULL;
+$myfname =NULL;
+$mylname =NULL;
+
+
+ while ($row = $result3->fetch_assoc())
+ {
+ $mynickname = $row['nickName'];
+$myfname =$row['firstName'];
+$mylname =$row['lastName'];
+
+
+$myfname = strtolower($myfname);
+$mylname = strtolower($mylname);
+$myfname = ucwords($myfname);
+$mylname = ucwords($mylname);
+
+$myname = $myfname." ".$mylname; 
+
+ }
+
+
+
+if( $mynickname != NULL )
+{
+ $myname =ucwords($mynickname);
+}
+
 
 
 
@@ -165,7 +196,7 @@ height: 150px;
    <h3> <a class="navbar-brand" href="/socialnetwork">The Social Network</a> </h3>
     <ul class="navbar-nav  ml-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#"><i class="fas fa-home"></i> <?=$name?><span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="home.php"><i class="fas fa-home"></i> <?=$myname?><span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="#">Discover</a>

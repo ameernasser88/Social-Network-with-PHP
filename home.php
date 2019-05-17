@@ -80,6 +80,8 @@ if( $nickname != NULL )
 
 
 
+
+
 // $stmt = $con->prepare('SELECT password, email FROM users WHERE id = ?');
 // // In this case we can use the account ID to get the account info.
 // $stmt->bind_param('s', $_SESSION['id']);
@@ -163,7 +165,7 @@ height: 150px;
         <a class="nav-link" href="#"><i class="fas fa-home"></i> <?=$name?><span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="#">Discover</a>
+        <a class="nav-link" href="discover.php">Discover</a>
       </li>
      
 

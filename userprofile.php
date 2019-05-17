@@ -246,8 +246,14 @@ height: 150px;
     <div class="row">
         <div class="col-sm-10">
             <h1><?=$name?></h1></div>
+
         <div class="col-sm-2">
             <a href="#" class="pull-right"><img title="profile image" class="img-circle img-responsive avatar-pic" src="profilepictures/<?=$profilepicture?>"></a>
+
+
+            <form method="POST" action="addfriend.php?id=<?=$friendID?>"  >
+            <button   class="btn btn-sm btn-primary " style=" margin-top: 5%; width: 150px;   background-color: #00a1ff; border-color: #00a1ff; ">Add Friend</button>
+            </form>
         </div>
     </div>
     <div class="row">

@@ -45,7 +45,7 @@ if( $nickname != NULL )
 
 //get friends only
 
-$results = $con->query("SELECT id , firstName , lastName , nickName , profilePicture FROM users ORDER BY firstName"); 
+$results = $con->query("SELECT id , firstName , lastName , nickName , profilePicture FROM users WHERE id = ANY (SELECT userB FROM friends WHERE userA = $id)  ORDER BY firstName"); 
 
 
 

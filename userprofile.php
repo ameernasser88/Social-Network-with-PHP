@@ -322,10 +322,10 @@ if($fStatus==0) {?>
 <?php 
 
 if($fStatus==1){ ?>
-            <form method="POST" action="addfriend.php?id=<?=$friendID?>"  >
+            <form method="POST" action="acceptfriend.php?id=<?=$friendID?>"  >
             <button   class="btn btn-sm btn-success " style=" margin-top: 5%; width: 150px; background-color: #64dd17; border-color: #64dd17;  "> <strong>Accept Request</strong></button>
             </form>
-            <form method="POST" action="addfriend.php?id=<?=$friendID?>"  >
+            <form method="POST" action="removefriend.php?id=<?=$friendID?>"  >
             <button   class="btn btn-sm btn-danger " style=" margin-top: 5%; width: 150px;  "> <strong>Decline Request</strong></button>
             </form>
 
@@ -340,7 +340,7 @@ if($fStatus==1){ ?>
 <?php 
 
 if($fStatus==2) {?>
-            <form method="POST" action=""  >
+            <form method="POST" action="removefriend.php?id=<?=$friendID?>"  >
             <button   class="btn btn-sm btn-warning " style=" margin-top: 5%; width: 150px; color: white;"><strong>Cancel Request</strong></button>
             </form>
 
@@ -356,7 +356,7 @@ if($fStatus==2) {?>
 <?php 
 
 if($fStatus==3) {?>
-            <form method="POST" action=""  >
+            <form method="POST" action="removefriend.php?id=<?=$friendID?>"  >
             <button   class="btn btn-sm btn-danger " style=" margin-top: 5%; width: 150px; "><strong>Remove Friend</strong></button>
             </form>
 

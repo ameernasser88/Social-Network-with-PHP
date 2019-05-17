@@ -65,7 +65,7 @@ $results = $con->query("SELECT id , firstName , lastName , nickName , profilePic
 <!DOCTYPE html>
 <html>
 <head>
-  <title><?=$name?></title>
+  <title>Discover - <?=$name?></title>
 
   <link href="css/stylesheet.css" rel="stylesheet" type="text/css">
   
@@ -136,7 +136,7 @@ height: 120px;
       </li>
 
  <form class="form-inline my-2 my-lg-0" method="POST" action="search.php">
-      <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search" aria-label="Search">
+      <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
       <button class="btn  my-2 my-sm-0" style="background-color: #00a1ff; border-color: white; color: white;" type="submit"><i class="fa fa-search"></i></button>
     </form>
     </ul>

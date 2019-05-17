@@ -209,7 +209,7 @@ if( $nickName != NULL )
     
   <div class="col-md-3 col-sm-6 " style="margin-top:5px; margin-bottom: 5px; ">
     <div class="img-thumbnail">
-         <img src="profilepictures/<?=$friendpp?>" style="  border-radius: 10%; padding-top: 4px; padding-bottom: 4px; margin-bottom: 4px;" class="pp-pic" n>
+        <a href="userprofile.php?id=<?=$friendID?>"> <img src="profilepictures/<?=$friendpp?>" style="  border-radius: 10%; padding-top: 4px; padding-bottom: 4px; margin-bottom: 4px;" class="pp-pic" n> </a>
          <div class="caption">
            <a  href="userprofile.php?id=<?=$friendID?>" >   <h6><?=$friendName?></h6> </a>
          </div>

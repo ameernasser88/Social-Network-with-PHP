@@ -213,7 +213,7 @@ height: 150px;
         <div class="col-sm-10">
             <h1><?=$name?></h1></div>
         <div class="col-sm-2">
-            <a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive avatar-pic" src="profilepictures/<?=$profilepicture?>"></a>
+            <a href="#" class="pull-right"><img title="profile image" class="img-circle img-responsive avatar-pic" src="profilepictures/<?=$profilepicture?>"></a>
         </div>
     </div>
     <div class="row">

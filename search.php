@@ -2,39 +2,31 @@
 
 session_start();
 // If the user is not logged in redirect to the login page...
-if (!isset($_SESSION['loggedin'])    ) {
+if (!isset($_SESSION['loggedin'])) {
 	header('Location: index.php');
 	exit();
 }
-
-
-
-
-$_SESSION['registered']=TRUE;
 
 $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
 $DATABASE_PASS = '';
 $DATABASE_NAME = 'socialnetwork';
-
-
-
-
 $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
 if (mysqli_connect_errno()) {
 	die ('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
 $id=$_SESSION['id'];
 
-$results = $con->query("SELECT firstName , lastName  FROM users  where id = $id ");
+$result = $con->query("SELECT firstName , lastName , nickName  FROM users  where id = $id ");
 
 $fName=NULL;
 $lName=NULL;
-
- while ($row = $results->fetch_assoc())
+$nickname = NULL;
+ while ($row = $result->fetch_assoc())
  {
  $fName =$row['firstName'];
  $lName = $row['lastName'];
+ $nickname =$row['nickName'];
  }
 
 $fName = strtolower($fName);
@@ -44,53 +36,38 @@ $lName = ucwords($lName);
 
 $name = $fName." ".$lName; 
 
-$nickname = NULL;
-
-$profilepicture = NULL;
-
-$phone = NULL;
-
-$homeTown=NULL;
-
-$maritalStatus = NULL;
-
-$result2 = $con->query("SELECT nickName , phone, profilePicture , homeTown , maritalStatus FROM users  where id = $id ");
-
- while ($row = $result2->fetch_assoc())
- {
- $nickname = $row['nickName'];
-$profilepicture = $row['profilePicture'];
-
-$phone =  $row['phone'];;
-
-$homeTown= $row['homeTown'];;
-
-$maritalStatus =  $row['maritalStatus'];;
- }
-
-
-
 if( $nickname != NULL )
 {
- $name =ucwords($nickname);
+ $name = $nickname;
+}
+
+
+if (!isset($_POST['search']) || $_POST['search']=="") {
+  header('Location: discover.php');
+  exit();
 }
 
 
 
+$searchWord = $_POST['search'];
 
 
 
 
 
-// $stmt = $con->prepare('SELECT password, email FROM users WHERE id = ?');
-// // In this case we can use the account ID to get the account info.
-// $stmt->bind_param('s', $_SESSION['id']);
-// $stmt->execute();
-// $stmt->bind_result($password, $email);
-// $stmt->fetch();
-// $stmt->close();
 
-// $id = $_SESSION['id'];
+
+
+//get friends only
+
+$results = $con->query("SELECT id , firstName , lastName , nickName , profilePicture FROM users WHERE (firstName LIKE '%{$searchWord }%' OR lastName LIKE '%{$searchWord }%' OR nickName LIKE '%{$searchWord }%') AND id <> $id ORDER BY firstName"); 
+
+
+
+
+
+
+
 
 
 
@@ -104,6 +81,7 @@ if( $nickname != NULL )
 <html>
 <head>
   <title><?=$name?></title>
+
   <link href="css/stylesheet.css" rel="stylesheet" type="text/css">
   
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
@@ -119,44 +97,30 @@ if( $nickname != NULL )
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-
-
-
-
-
-
+  
+  
 
 <style>
 	
-	.avatar-pic {
-width: 150px;
-height: 150px;
+	.pp-pic {
+width: 120px;
+height: 120px;
 }
+
+
 
 
 </style>
 
 
 
-
-
-
-
-
 </head>
-<body class="loggedin">
-	<!-- <nav class="navtop">
-			<div>
-				<h1>The Social Network</h1>
-				<a href="editprofile.php"><i class="fas fa-home"></i>Edit Profile</a>
-				<a href="signout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
-			</div>
-		</nav> -->
+<body class="loggedin" >
+	
 
 
 
-    <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #00a1ff;">
+    <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #00a1ff; margin-bottom: 2%;">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -164,10 +128,10 @@ height: 150px;
    <h3> <a class="navbar-brand" href="/socialnetwork">The Social Network</a> </h3>
     <ul class="navbar-nav  ml-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#"><i class="fas fa-home"></i> <?=$name?><span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="home.php"><i class="fas fa-home"></i> <?=$name?><span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="discover.php">Discover</a>
+        <a class="nav-link" href="#">Discover</a>
       </li>
      
 
@@ -186,7 +150,7 @@ height: 150px;
         </div>
       </li>
 
- <form class="form-inline my-2 my-lg-0" method="POST" action="search.php">
+ <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
       <button class="btn  my-2 my-sm-0" style="background-color: #00a1ff; border-color: white; color: white;" type="submit"><i class="fa fa-search"></i></button>
     </form>
@@ -201,72 +165,103 @@ height: 150px;
 
 
 
-
-		<div class="content" style="margin-top:2%; margin-bottom: 0;" >
-			<!-- <h4>Welcome , <?=$name?> !</h4> -->
+<div class="container" >
 
 
 
 
+<div class="row text-center" style="display:flex; wrap:wrap;">
+  
 
 
-<div class="container bootstrap snippet">
-    <div class="row">
-        <div class="col-sm-10">
-            <h1><?=$name?></h1></div>
-        <div class="col-sm-2">
-            <a href="#" class="pull-right"><img title="profile image" class="img-circle img-responsive avatar-pic" src="profilepictures/<?=$profilepicture?>"></a>
-        </div>
+
+<!-- <% campgrounds.forEach(function(campground){ %> -->
+
+
+
+<?php 
+// get the friend's attributes id , firstName , lastName , nickName , profilePicture
+
+
+while ($row = $results->fetch_assoc() )
+ {
+
+
+ $firstName = NULL;
+ $lastName = NULL;
+ $nickName = NULL;
+
+
+
+
+$friendID = $row['id'];
+ $firstName =$row['firstName'];
+ $lastName = $row['lastName'];
+ $nickName =$row['nickName'];
+  
+  $friendpp =$row['profilePicture'];
+ 
+
+$firstName = strtolower($firstName);
+$lastName = strtolower($lastName);
+$firstName = ucwords($firstName);
+$lastName = ucwords($lastName);
+
+$friendName = $firstName." ".$lastName; 
+
+if( $nickName != NULL )
+{
+ $friendName = $nickName;
+}
+
+
+
+
+   
+
+
+ ?>
+    
+  <div class="col-md-3 col-sm-6 " style="margin-top:5px; margin-bottom: 5px; ">
+    <div class="img-thumbnail">
+        <a href="userprofile.php?id=<?=$friendID?>"> <img src="profilepictures/<?=$friendpp?>" style="  border-radius: 10%; padding-top: 4px; padding-bottom: 4px; margin-bottom: 4px;" class="pp-pic" n> </a>
+         <div class="caption">
+           <a  href="userprofile.php?id=<?=$friendID?>" >   <h6><?=$friendName?></h6> </a>
+         </div>
+         <p>
+           <a href="userprofile.php?id=<?=$friendID?>" class="btn btn-sm btn-primary" style="background-color: #00a1ff; border-color: #00a1ff; ">View Profile</a>
+         </p>
     </div>
-    <div class="row">
-        <div class="col-sm-3">
-            <!--left col-->
-
-            <ul class="list-group">
-                <li class="list-group-item text-muted">Info</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Hometown   </strong></span><?=$homeTown?></li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Phone   </strong></span> <?=$phone?></li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Status   </strong></span> <?=$maritalStatus?></li>
-
-            </ul>
-
-          
-
-           
-
-            
-
-        </div>
+   
+     
+  
+  </div>  
+    
+<?php } ?>
 
 
+  </div>
+
+</div>
 
 
-
-		</div>
-
-		
-
-	<div class="content" style="margin: 0 auto;">
-
-
-
-
-<span>
+   
 
 <footer style=" display: table;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    margin-top:20%;">
-  
+    margin-top:10%;">
+	
   <p>2019  ©</p>
   
 </footer>
 
-</span>
 
 
-</div>
+
+
+
 
 
 

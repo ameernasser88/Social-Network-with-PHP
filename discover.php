@@ -380,7 +380,7 @@ else if ($fStatus == 1) {
           <p>
 
           
-            <a href="userprofile.php?id=<?=$friendID?>" class="btn btn-sm btn-success style="color:white; background-color: #64dd17; border-color: #64dd17; "  >View Request</a>
+            <a href="userprofile.php?id=<?=$friendID?>" class="btn btn-sm btn-success" style="color:white; background-color: #64dd17; border-color: #64dd17; "  >View Request</a>
           </p>
      </div>
     

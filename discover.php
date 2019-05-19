@@ -289,7 +289,114 @@ if( $nickName != NULL )
   
   </div>  
     
-<?php }}}?>
+<?php }
+
+
+else if ($fStatus == 2) {
+
+
+  $firstName =$row['firstName'];
+  $lastName = $row['lastName'];
+  $nickName =$row['nickName'];
+   
+   $friendpp =$row['profilePicture'];
+  
+ 
+ $firstName = strtolower($firstName);
+ $lastName = strtolower($lastName);
+ $firstName = ucwords($firstName);
+ $lastName = ucwords($lastName);
+ 
+ $friendName = $firstName." ".$lastName; 
+ 
+ if( $nickName != NULL )
+ {
+  $friendName = $nickName;
+ }
+ 
+ 
+ 
+ 
+    
+ 
+ 
+  ?>
+     
+   <div class="col-md-3 col-sm-6 " style="margin-top:5px; margin-bottom: 5px; ">
+     <div class="img-thumbnail">
+         <a href="userprofile.php?id=<?=$friendID?>"> <img src="profilepictures/<?=$friendpp?>" style="  border-radius: 10%; padding-top: 4px; padding-bottom: 4px; margin-bottom: 4px;" class="pp-pic" n> </a>
+          <div class="caption">
+            <a  href="userprofile.php?id=<?=$friendID?>" >   <h6><?=$friendName?></h6> </a>
+          </div>
+          <p>
+
+          
+            <a href="userprofile.php?id=<?=$friendID?>" class="btn btn-sm btn-warning" style="color:white;"  >Cancel Request</a>
+          </p>
+     </div>
+    
+      
+   
+   </div>  
+     
+ <?php }
+
+else if ($fStatus == 1) {
+
+
+  $firstName =$row['firstName'];
+  $lastName = $row['lastName'];
+  $nickName =$row['nickName'];
+   
+   $friendpp =$row['profilePicture'];
+  
+ 
+ $firstName = strtolower($firstName);
+ $lastName = strtolower($lastName);
+ $firstName = ucwords($firstName);
+ $lastName = ucwords($lastName);
+ 
+ $friendName = $firstName." ".$lastName; 
+ 
+ if( $nickName != NULL )
+ {
+  $friendName = $nickName;
+ }
+ 
+ 
+ 
+ 
+    
+ 
+ 
+  ?>
+     
+   <div class="col-md-3 col-sm-6 " style="margin-top:5px; margin-bottom: 5px; ">
+     <div class="img-thumbnail">
+         <a href="userprofile.php?id=<?=$friendID?>"> <img src="profilepictures/<?=$friendpp?>" style="  border-radius: 10%; padding-top: 4px; padding-bottom: 4px; margin-bottom: 4px;" class="pp-pic" n> </a>
+          <div class="caption">
+            <a  href="userprofile.php?id=<?=$friendID?>" >   <h6><?=$friendName?></h6> </a>
+          </div>
+          <p>
+
+          
+            <a href="userprofile.php?id=<?=$friendID?>" class="btn btn-sm btn-success style="color:white; background-color: #64dd17; border-color: #64dd17; "  >View Request</a>
+          </p>
+     </div>
+    
+      
+   
+   </div>  
+     
+ <?php }
+
+
+
+
+
+
+
+}}?>
 
 
   </div>

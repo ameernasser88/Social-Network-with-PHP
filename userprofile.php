@@ -10,6 +10,9 @@ if (!isset($_SESSION['loggedin'])    ) {
 
 
 
+
+
+
 $_SESSION['registered']=TRUE;
 
 $DATABASE_HOST = 'localhost';
@@ -27,7 +30,15 @@ if (mysqli_connect_errno()) {
 $id=$_SESSION['id'];
 
 
+
+
+
 $friendID = $_GET['id'];
+
+
+if($friendID==$id){
+  header('Location: home.php');
+}
 
 
 

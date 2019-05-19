@@ -45,7 +45,7 @@ if( $nickname != NULL )
 
 //get friends only
 
-$results = $con->query("SELECT id , firstName , lastName , nickName , profilePicture FROM users WHERE id = ANY (SELECT userB FROM friends WHERE userA = $id)  ORDER BY firstName"); 
+$results = $con->query("SELECT id , firstName , lastName , nickName , profilePicture FROM users WHERE id =  ANY (SELECT userB FROM friends WHERE userA = $id )  ORDER BY firstName"); 
 
 
 
@@ -168,18 +168,66 @@ height: 120px;
 // get the friend's attributes id , firstName , lastName , nickName , profilePicture
 
 
+
+
+
 while ($row = $results->fetch_assoc() )
  {
 
 
- $firstName = NULL;
- $lastName = NULL;
- $nickName = NULL;
+
+  $fStatus = NULL ;
+  $statusA = NULL;
+  $statusB = NULL;
+  
+  $friendID = $row['id'];
+  
+  $userASQL = $con->query("SELECT status FROM friends  WHERE userA = $id AND userB = $friendID ");
+  
+  if (mysqli_num_rows($userASQL)==0) { $fStatus = 0;}
+  
+  
+     $userBSQL = $con->query("SELECT status FROM friends  WHERE userA = $friendID AND userB = $id ");
+  
+   if (mysqli_num_rows($userBSQL)==0) { $fStatus = 0;}  
+
+
+   while ($row1 = $userASQL->fetch_assoc())
+ {
+     $statusA = $row1['status'];
+ }
+
+ while ($row2 = $userBSQL->fetch_assoc())
+ {
+     $statusB = $row2['status'];
+ }
+
+
+ 
+// case 1 
+if( $statusA == 0 && $statusB == 1  )
+{
+  $fStatus = 1;
+}
+
+// case 2
+else if ( $statusA == 1 && $statusB == 0)
+{
+  $fStatus = 2;
+}
+
+// case 3
+else if ( $statusA == 1 && $statusB == 1) {
+
+  $fStatus = 3;
+}
 
 
 
 
-$friendID = $row['id'];
+if($fStatus == 3) {
+
+
  $firstName =$row['firstName'];
  $lastName = $row['lastName'];
  $nickName =$row['nickName'];
@@ -222,7 +270,7 @@ if( $nickName != NULL )
   
   </div>  
     
-<?php } ?>
+<?php } }?>
 
 
   </div>

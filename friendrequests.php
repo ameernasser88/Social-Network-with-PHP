@@ -45,7 +45,7 @@ if( $nickname != NULL )
 
 //get friends only
 $newRequest = 1;
-$results = $con->query("SELECT id , firstName , lastName , nickName , profilePicture FROM users WHERE id =  ANY (SELECT userB FROM friends WHERE userA = $id AND status =1 )  ORDER BY firstName"); 
+$results = $con->query("SELECT id , firstName , lastName , nickName , profilePicture FROM users WHERE id =  ANY (SELECT userB FROM friends WHERE userA = $id )  ORDER BY firstName"); 
 
 if (mysqli_num_rows($results) == 0) { 
   $newRequest = 0;
@@ -296,7 +296,7 @@ if( $nickName != NULL )
   
   </div>  
     
-<?php } }  }?>
+<?php } } }?>
 
 
   </div>

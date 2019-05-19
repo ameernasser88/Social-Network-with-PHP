@@ -57,16 +57,19 @@ $searchWord = $_POST['search'];
 
 
 
+$found = 1;
 
-
-//get friends only
+//search query
 
 $results = $con->query("SELECT id , firstName , lastName , nickName , profilePicture FROM users WHERE (firstName LIKE '%{$searchWord }%' OR lastName LIKE '%{$searchWord }%' OR nickName LIKE '%{$searchWord }%') AND id <> $id ORDER BY firstName"); 
 
 
 
 
-
+if (mysqli_num_rows($results) == 0) { 
+  $found = 0;
+  }  
+  
 
 
 
@@ -168,10 +171,34 @@ height: 120px;
 
 <div class="container" >
 
-
-
-
 <div class="row text-center" style="display:flex; wrap:wrap;">
+
+<?php 
+// get the friend's attributes id , firstName , lastName , nickName , profilePicture
+
+
+if($found == 0)
+{  
+  ?>
+
+
+  <div class="container" style="margin : 0 auto;" >
+  <h1>Nothing Found :(</h1>
+  <div style = "display: block; margin: 5% auto;"><img src="images/sad.webp"></div>
+  <div class="container">
+    <form class="form-inline my-2 my-lg-0" method="POST" action="search.php">
+      <input class="form-control mr-sm-2" type="search" name="search" placeholder="Try Again" aria-label="Search" style="width:90%;">
+      <button class="btn  my-2 my-sm-0" style="background-color: #00a1ff; border-color: white; color: white;" type="submit"><i class="fa fa-search"></i></button>
+    </form>
+  </div>
+  </div>
+<?php
+}
+
+?>
+
+
+
   
 
 

@@ -50,7 +50,11 @@ status = 0') ) {
 
 
 
-header("Location: userprofile.php?id=".$friendID);
+
+//header("Location: userprofile.php?id=".$friendID);
+
+
+header('Location: ' . $_SERVER['HTTP_REFERER']);
 
 
 

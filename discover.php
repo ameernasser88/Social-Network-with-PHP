@@ -53,8 +53,10 @@ $foreverAlone = 1;
 
 
 
+$friendRequests = $con->query("SELECT id , firstName , lastName , nickName , profilePicture FROM users WHERE id =  ANY (SELECT userB FROM friends WHERE userA = $id AND status = 0 )  ORDER BY firstName"); 
 
 
+$requestCount = mysqli_num_rows($friendRequests);
 
 
 
@@ -117,6 +119,20 @@ height: 120px;
       <li class="nav-item active">
         <a class="nav-link" href="home.php"><i class="fas fa-home"></i> <?=$name?><span class="sr-only">(current)</span></a>
       </li>
+
+
+ <li class="nav-item dropdown active">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="far fa-bell"></i>  Notifications
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="friendrequests.php"><i class="fas fa-users"></i> <?=$requestCount?> Friend Request(s)</a>
+
+        </div>
+ </li>
+
+
+
       <li class="nav-item active">
         <a class="nav-link" href="#">Discover</a>
       </li>

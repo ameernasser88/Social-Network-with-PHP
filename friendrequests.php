@@ -282,7 +282,7 @@ if( $nickName != NULL )
             </button>
             </form>
             <form method="POST" action="removefriend.php?id=<?=$friendID?>"  >
-            <button   class="btn btn-sm btn-danger " style=" ">Decline Request</button>
+            <button   class="btn btn-sm btn-danger " style="margin-top:2%; ">Decline Request</button>
             </form>
 
 

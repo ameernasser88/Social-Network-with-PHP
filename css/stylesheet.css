@@ -96,5 +96,14 @@ body.loggedin {
 	padding: 5px;
 	margin: 0 0 10px 0;
 }
-
+.profilePicture{
+	margin:5% 5%;
+	border: 2px red solid;
+}
+.be-user-info{
+	margin:1px 1px;
+}
+#followbtn{
+	margin-top:60px;
+}
 

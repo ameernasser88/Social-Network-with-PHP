@@ -44,10 +44,12 @@ if( $nickname != NULL )
 
 
 //get friends only
-
+$foreverAlone = NULL; //variable to know if user 
 $results = $con->query("SELECT id , firstName , lastName , nickName , profilePicture FROM users WHERE id =  ANY (SELECT userB FROM friends WHERE userA = $id )  ORDER BY firstName"); 
 
-
+if (mysqli_num_rows($results) == 0) { 
+$foreverAlone = 1;
+}  
 
 
 
@@ -160,7 +162,8 @@ height: 120px;
 
 
 
-<!-- <% campgrounds.forEach(function(campground){ %> -->
+
+
 
 
 
@@ -168,9 +171,21 @@ height: 120px;
 // get the friend's attributes id , firstName , lastName , nickName , profilePicture
 
 
-
-
-
+if($foreverAlone == 1)
+{  
+  ?>
+  <h1>Oh no! seems like you dont have any friends :(</h1>
+  <div style = "display: block; margin: 5% auto;"><img src="images/sad.webp"></div>
+  <div class="container">
+  <form class="form-inline my-2 my-lg-0" method="POST" action="search.php">
+      <input class="form-control mr-sm-2" type="search" name="search" placeholder="Find friends" aria-label="Search" style="width:90%;">
+      <button class="btn  my-2 my-sm-0" style="background-color: #00a1ff; border-color: white; color: white;" type="submit"><i class="fa fa-search"></i></button>
+    </form>
+  </div>
+<?php
+}
+else
+{
 while ($row = $results->fetch_assoc() )
  {
 
@@ -270,7 +285,7 @@ if( $nickName != NULL )
   
   </div>  
     
-<?php } }?>
+<?php }}}?>
 
 
   </div>

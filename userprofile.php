@@ -200,6 +200,13 @@ $friendRequests = $con->query("SELECT id , firstName , lastName , nickName , pro
 
 $requestCount = mysqli_num_rows($friendRequests);
 
+if($fStatus == 3){
+$posts = $con->query("SELECT caption , state , image , time  FROM posts  WHERE authorId = $friendID AND state != 3 ORDER BY time DESC");
+}else{
+$posts = $con->query("SELECT caption , state , image , time  FROM posts  WHERE authorId = $friendID AND state != 3 AND state != 2  ORDER BY time DESC");
+}
+
+
 
 ?>
 
@@ -449,7 +456,56 @@ height: 150px;
                 </div>
             </div>
             <div class="col-md-6 gedf-main">
+            <?php while ($row = $posts->fetch_assoc()) { ?>
+                        <!--- \\\\\\\Post-->
+                        <div class="card gedf-card" style="margin-top: 10px;">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="mr-2">
+                                            <img class="rounded-circle" width="45" src="profilepictures/<?= $profilepicture ?>" alt="">
+                                        </div>
+                                        <div class="ml-2">
+                                            <div class="h5 m-0">@<?= $nickname ?></div>
+                                            <div class="h7 text-muted"><?php echo ($fName . " " . $lName); ?></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <!-- <div class="dropdown">
+                                        <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-ellipsis-h"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                            <div class="h6 dropdown-header">Configuration</div>
+                                            <a class="dropdown-item" href="#">Save</a>
+                                            <a class="dropdown-item" href="#">Hide</a>
+                                            <a class="dropdown-item" href="#">Report</a>
+                                        </div>
+                                    </div> -->
+                                    </div>
+                                </div>
 
+                            </div>
+                            <div class="card-body">
+                                <div class="text-muted h7 mb-2"> <i class="fa fa-clock"></i> <?= $row['time'] ?></div>
+                                <!-- <a class="card-link" href="#">
+                                <h5 class="card-title">Caption</h5>
+                            </a> -->
+
+                                <p class="card-text">
+                                    <?= $row['caption'] ?>
+                                </p>
+                            </div>
+                            <!-- <div class="card-footer">
+                            <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
+                            <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+                            <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+                        </div> -->
+                        </div>
+                        <!-- Post /////-->
+                    
+
+            <?php } ?>
         </div>
     </div>
 

@@ -322,7 +322,7 @@ height: 150px;
       <div class="container-fluid gedf-wrapper">
         <div class="row">
             <div class="col-md-3">
-                <div class="card">
+                <div class="card" style="box-shadow:0 2px 4px rgba(0,0,0,.4);">
                     <div class="card-body">
                          <div>
                             <img class="img-circle img-responsive img-fluid" src="profilepictures/<?=$profilepicture?>" style="border-radius:50%">

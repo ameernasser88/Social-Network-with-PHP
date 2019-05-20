@@ -319,118 +319,95 @@ height: 150px;
 		<div class="content" style="margin-top:2%; margin-bottom: 0;" >
 			<!-- <h4>Welcome , <?=$name?> !</h4> -->
 
+      <div class="container-fluid gedf-wrapper">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                         <div>
+                            <img class="img-circle img-responsive img-fluid" src="profilepictures/<?=$profilepicture?>" style="border-radius:50%">
+                        </div>
+                        <div style="margin:5px auto; text-align:center; width:100%;">
+                        <?php 
+                          if($fStatus==0) {?>
+                                      <form method="POST" action="addfriend.php?id=<?=$friendID?>"  >
+                                      <button   class="btn btn-sm btn-primary " style=" margin-top: 5%; width: 150px;   background-color: #00a1ff; border-color: #00a1ff; "><strong>Add Friend</strong></button>
+                                      </form>
+
+                          <?php 
+                          }
+                          ?>
+
+
+
+
+                          <?php 
+
+                          if($fStatus==1){ ?>
+                                      <form method="POST" action="acceptfriend.php?id=<?=$friendID?>"  >
+                                      <button   class="btn btn-sm btn-success " style=" margin-top: 5%; width: 150px; background-color: #64dd17; border-color: #64dd17;  "> <strong>Accept Request</strong></button>
+                                      </form>
+                                      <form method="POST" action="removefriend.php?id=<?=$friendID?>"  >
+                                      <button   class="btn btn-sm btn-danger " style=" margin-top: 5%; width: 150px;  "> <strong>Decline Request</strong></button>
+                                      </form>
+
+                          <?php 
+                          }
+                          ?>
 
 
 
 
 
-<div class="container bootstrap snippet">
-    <div class="row">
-        <div class="col-sm-10">
-            <h1><?=$name?></h1></div>
+                          <?php 
 
-        <div class="col-sm-2">
-            <a href="#" class="pull-right"><img title="profile image" class="img-circle img-responsive avatar-pic" src="profilepictures/<?=$profilepicture?>"></a>
+                          if($fStatus==2) {?>
+                                      <form method="POST" action="removefriend.php?id=<?=$friendID?>"  >
+                                      <button   class="btn btn-sm btn-warning " style=" margin-top: 5%; width: 150px; color: white;"><strong>Cancel Request</strong></button>
+                                      </form>
 
-
-
-
-<?php 
-
-if($fStatus==0) {?>
-            <form method="POST" action="addfriend.php?id=<?=$friendID?>"  >
-            <button   class="btn btn-sm btn-primary " style=" margin-top: 5%; width: 150px;   background-color: #00a1ff; border-color: #00a1ff; "><strong>Add Friend</strong></button>
-            </form>
-
-<?php 
-}
-?>
-
-
-
-
-<?php 
-
-if($fStatus==1){ ?>
-            <form method="POST" action="acceptfriend.php?id=<?=$friendID?>"  >
-            <button   class="btn btn-sm btn-success " style=" margin-top: 5%; width: 150px; background-color: #64dd17; border-color: #64dd17;  "> <strong>Accept Request</strong></button>
-            </form>
-            <form method="POST" action="removefriend.php?id=<?=$friendID?>"  >
-            <button   class="btn btn-sm btn-danger " style=" margin-top: 5%; width: 150px;  "> <strong>Decline Request</strong></button>
-            </form>
-
-<?php 
-}
-?>
-
-
-
-
-
-<?php 
-
-if($fStatus==2) {?>
-            <form method="POST" action="removefriend.php?id=<?=$friendID?>"  >
-            <button   class="btn btn-sm btn-warning " style=" margin-top: 5%; width: 150px; color: white;"><strong>Cancel Request</strong></button>
-            </form>
-
-<?php 
-}
-?>
+                          <?php 
+                          }
+                          ?>
 
 
 
 
 
 
-<?php 
+                          <?php 
 
-if($fStatus==3) {?>
-            <form method="POST" action="removefriend.php?id=<?=$friendID?>"  >
-            <button   class="btn btn-sm btn-danger " style=" margin-top: 5%; width: 150px; "><strong>Remove Friend</strong></button>
-            </form>
+                          if($fStatus==3) {?>
+                                      <form method="POST" action="removefriend.php?id=<?=$friendID?>"  >
+                                      <button   class="btn btn-sm btn-danger " style=" margin-top: 5%; width: 150px; "><strong>Remove Friend</strong></button>
+                                      </form>
 
-<?php 
-}
-?>
-
-
-
-
-
-
-
+                          <?php 
+                          }
+                          ?>
+                        </div>
+                        <div class="h5">@<?=$nickname?></div>
+                        <div class="h7 text-muted">Fullname : <?php echo($fName." ".$lName);?></div>
+                        <div class="h7">Developer of web applications, JavaScript, PHP, Java, Python, Ruby, Java, Node.js,
+                            etc.
+                        </div>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="h6 text-muted"><i class="fas fa-home"></i> <?=$homeTown?></div>
+                            <div class="h6 text-muted"><i class="fas fa-phone"></i> <?=$phone?></div>
+                            <div class="h6 text-muted"><i class="fas fa-heart"></i> <?=$maritalStatus?></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 gedf-main">
 
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-3">
-            <!--left col-->
-
-            <ul class="list-group">
-                <li class="list-group-item text-muted">Info</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Hometown   </strong></span><?=$homeTown?></li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Phone   </strong></span> <?=$phone?></li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Status   </strong></span> <?=$maritalStatus?></li>
-
-            </ul>
-
-          
-
-           
-
-            
-
-        </div>
 
 
-
-
-
-		</div>
-
-		
-
+	
 	<div class="content" style="margin: 0 auto;">
 
 

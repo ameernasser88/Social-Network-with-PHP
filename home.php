@@ -54,7 +54,7 @@ $homeTown=NULL;
 
 $maritalStatus = NULL;
 
-$result2 = $con->query("SELECT firstName , lastName , nickName , phone, profilePicture , homeTown , maritalStatus FROM users  where id = $id ");
+$result2 = $con->query("SELECT firstName , lastName , nickName , phone, profilePicture , homeTown , maritalStatus , about FROM users  where id = $id ");
 
  while ($row = $result2->fetch_assoc())
  {
@@ -67,6 +67,8 @@ $phone =  $row['phone'];
 $homeTown= $row['homeTown'];
 
 $maritalStatus =  $row['maritalStatus'];
+
+$about = $row['about'];
  }
 
 
@@ -251,8 +253,8 @@ height: 150px;
                         </div>
                         <div class="h5">@<?=$nickname?></div>
                         <div class="h7 text-muted">Fullname : <?php echo($fName." ".$lName);?></div>
-                        <div class="h7">Developer of web applications, JavaScript, PHP, Java, Python, Ruby, Java, Node.js,
-                            etc.
+                        <div class="h7">
+                            <?=$about?>
                         </div>
                     </div>
                     <ul class="list-group list-group-flush">

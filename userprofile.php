@@ -70,18 +70,20 @@ $homeTown=NULL;
 
 $maritalStatus = NULL;
 
-$result2 = $con->query("SELECT nickName , phone, profilePicture , homeTown , maritalStatus FROM users  where id = $friendID  ");
+$result2 = $con->query("SELECT nickName , phone, profilePicture , homeTown , maritalStatus , about FROM users  where id = $friendID  ");
 
  while ($row = $result2->fetch_assoc())
  {
  $nickname = $row['nickName'];
 $profilepicture = $row['profilePicture'];
 
-$phone =  $row['phone'];;
+$phone =  $row['phone'];
 
-$homeTown= $row['homeTown'];;
+$homeTown= $row['homeTown'];
 
-$maritalStatus =  $row['maritalStatus'];;
+$maritalStatus =  $row['maritalStatus'];
+
+$about = $row['about'];
  }
 
 
@@ -388,8 +390,8 @@ height: 150px;
                         </div>
                         <div class="h5">@<?=$nickname?></div>
                         <div class="h7 text-muted">Fullname : <?php echo($fName." ".$lName);?></div>
-                        <div class="h7">Developer of web applications, JavaScript, PHP, Java, Python, Ruby, Java, Node.js,
-                            etc.
+                        <div class="h7">
+                            <?=$about?>
                         </div>
                     </div>
                     <ul class="list-group list-group-flush">

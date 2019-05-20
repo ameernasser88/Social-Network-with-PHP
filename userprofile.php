@@ -395,8 +395,53 @@ height: 150px;
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <div class="h6 text-muted"><i class="fas fa-home"></i> <?=$homeTown?></div>
+                            <?php 
+                          if($fStatus==0) {?>
+                                      
+
+                          <?php 
+                          }
+                          ?>
+
+
+
+
+                          <?php 
+
+                          if($fStatus==1){ ?>
+                                     
+
+                          <?php 
+                          }
+                          ?>
+
+
+
+
+
+                          <?php 
+
+                          if($fStatus==2) {?>
+                                     
+
+                          <?php 
+                          }
+                          ?>
+
+
+
+
+
+
+                          <?php 
+
+                          if($fStatus==3) {?>
                             <div class="h6 text-muted"><i class="fas fa-phone"></i> <?=$phone?></div>
                             <div class="h6 text-muted"><i class="fas fa-heart"></i> <?=$maritalStatus?></div>
+
+                          <?php 
+                          }
+                          ?>
                         </li>
                     </ul>
                 </div>

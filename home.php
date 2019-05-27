@@ -288,7 +288,7 @@ $posts = $con->query("SELECT caption , state , image , time  FROM posts  WHERE a
                                 <div class="btn-toolbar justify-content-between">
                                     <div class="btn-group">
                                         <select class="custom-select" id="type" name="state">
-                                            <option value="0">Post Type</option>
+                                          
                                             <option value="1">Public</option>
                                             <option value="2">Friends only</option>
                                             <option value="3">Only me</option>
